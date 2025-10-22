@@ -13,11 +13,11 @@ This pipeline is designed to "enable engineers to ship confidently." It:
 
 This pipeline runs three parallel jobs on every Pull Request:
 
-1.  **Dependency Scanning (Trivy):** Scans all `npm` packages for known vulnerabilities (CVEs). This maps to the JD's need to "triage and respond to security alerts from... dependency scanners."
+1.  **Dependency Scanning (Trivy):** Scans all `npm` packages for known vulnerabilities (CVEs). 
 
-2.  **Static Analysis / SAST (Semgrep):** Scans the application code for common vulnerabilities (like the XSS risk in `VulnerableComponent.tsx`). This shows experience with "modern web security best practices."
+2.  **Static Analysis / SAST (Semgrep):** Scans the application code for common vulnerabilities (like the XSS risk in `VulnerableComponent.tsx`). 
 
-3.  **Secret Scanning (Gitleaks):** Scans the repository for hard-coded secrets (like the `FAKE_API_KEY` in `VulnerableComponent.tsx`). This is a critical baseline security practice.
+3.  **Secret Scanning (Gitleaks):** Scans the repository for hard-coded secrets (like the `FAKE_API_KEY` in `VulnerableComponent.tsx`). 
 
 ## How to See it in Action
 
