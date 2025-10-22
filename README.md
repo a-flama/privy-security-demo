@@ -1,6 +1,4 @@
-# Privy Security Engineer Demo Project
-
-This repository is a demo project to showcase a "builder's mindset" and a "developer-enabling" approach to security, as mentioned in the Security Engineer role at Privy.
+# SecureByDefault
 
 The project consists of a simple React + TypeScript application that has a CI/CD pipeline in GitHub Actions (`.github/workflows/security.yml`) configured to automatically find and flag security issues.
 
