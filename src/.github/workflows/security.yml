@@ -1,0 +1,53 @@
+# .github/workflows/security.yml
+
+name: Security Scan
+
+# Trigger this workflow on pull requests targeting the 'main' branch
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # Job 1: Scan for vulnerable dependencies
+  dependency-scan:
+    name: Dependency Scan (Trivy)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy filesystem scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          exit-code: '1' # Fail the pipeline if HIGH or CRITICAL are found
+          ignore-unfixed: true
+          severity: 'HIGH,CRITICAL'
+          format: 'table'
+
+  # Job 2: Scan for code quality issues (SAST)
+  sast-scan:
+    name: SAST Scan (Semgrep)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep
+        # Use the free, community-driven ruleset
+        uses: semgrep/semgrep-action@v2
+        with:
+          config: p/default # 'p/default' is a great, broad starting point
+
+  # Job 3: Scan for hard-coded secrets
+  secret-scan:
+    name: Secret Scan (Gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        # Gitleaks will find the FAKE_API_KEY and fail this step
